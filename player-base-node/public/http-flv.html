@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/flv.js/1.6.1/flv.min.js"></script>
+    <title>Http-Flv</title>
+  </head>
+  <body>
+    <!-- <video id="video1" height="300" width="400" controls="controls" muted="true"></video>
+    <video id="video2" height="300" width="400" controls="controls" muted="true"></video>
+    <video id="video3" height="300" width="400" controls="controls" muted="true"></video> -->
+    <script>
+      if (flvjs.isSupported) {
+        const playVideo = function ({ url, id }) {
+          // 动态创建元素
+          let el = document.createElement('video');
+          el.setAttribute('id', id);
+          el.setAttribute('width', 400);
+          el.setAttribute('height', 300);
+          el.setAttribute('controls', 'controls');
+          el.muted = true;
+          document.body.appendChild(el);
+
+          // 已有元素
+          // var el = document.getElementById(id);
+          console.log('creatFlv player::', url, id);
+          var flvPlayer = flvjs.createPlayer(
+            {
+              type: 'flv',
+              url: url,
+              hasAudio: false,
+              duration: 0,
+              isLive: true,
+            },
+            {
+              enableStashBuffer: false,
+              isLive: true,
+              lazyLoad: false,
+              lazyLoadMaxDuration: 0,
+              lazyLoadRecoverDuration: 0,
+              deferLoadAfterSourceOpen: false,
+              fixAudioTimestampGap: false,
+              stashInitialSize: 128,
+            }
+          );
+          flvPlayer.attachMediaElement(el);
+          flvPlayer.load();
+          flvPlayer.play();
+        };
+        const videoList = [
+          'http://localhost:8085/live/test.flv',
+          'http://localhost:8085/live/test2.flv',
+          'http://localhost:8085/live/test3.flv',
+          'http://localhost:8085/live/test4.flv',
+        ];
+        videoList.forEach((url, index) => {
+          playVideo({ url, id: `video${index + 1}` });
+        });
+      }
+    </script>
+  </body>
+</html>

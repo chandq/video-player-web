@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSMpeg</title>
+    <style>
+      .jsmpeg,
+      #video-canvas {
+        border: 2px solid green;
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- jsupeg详细用法见：https://github.com/phoboslab/jsmpeg -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jsmpeg/0.2/jsmpg.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jsmpeg/0.2/jsmpg.js"></script>
+    <!-- 一HL调用方式 -->
+    <div class="jsmpeg" data-url="ws://localhost:3000"></div>
+    <!-- JS 调用万式-->
+    <canvas id="video-canvas"></canvas>
+    <script type="module">
+      var canvas = document.getElementById('video-canvas');
+      var url = 'ws://127.0.0.1:3000';
+      let ws = new WebSocket(url);
+      console.log('ws::', ws);
+      var player = new jsmpeg(ws, { canvas: canvas });
+      player.play();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "player-base-node",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "web端视频播放器，包含`node + http-flv`和`jessibuca + ws-flv`两种方案",
+  "scripts": {
+    "rtmp2http-serve": "node ./src/rtmp2http",
+    "rtsp2rtmp-serve": "node ./src/rtsp2rtmp"
+  },
+  "devDependencies": {
+    "http-server": "^13.0.2",
+    "node-media-server": "^2.3.8",
+    "ws": "^8.2.3"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "author": "chendq",
+  "maintainers": [
+    "chendq"
+  ]
+}
