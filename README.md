@@ -14,6 +14,20 @@
 
 这种方案适合播放 H.264 编码的 RTSP 视频流，如果播放 H.265 编码的视频流，则需要 ffmpeg 在 rtsp 转 rtmp 时进行编码转换(很占 CPU 和内存资源，不推荐)，转为 H.264，因为 Adobe 的 Flv.js 工具仅支持解码 H.264 的 http-flv 视频流。
 
+#### Usage
+
+1. 进入 `player-base-node` 目录
+2. 安装依赖 `npm i`
+3. 先后启动 rtmp2http 服务、rtsp2rmtp 服务（注意先后顺序）
+
+   - `npm run rtmp2http-serve`
+
+   - `npm run rtsp2rtmp-serve` 或者执行 ffmpeg 命令方式
+
+4. 打开 web video 页面
+
+   `npx http-server -d ./public`，选择 `http-flv.html` 打开
+
 ## jessibuca + ws-flv 方案
 
 > 主要是借助强大的开源工具 [Jessibuca](http://jessibuca.monibuca.com/) H5 直播流播放器工具，然后后端配合将 RTSP 视频流转为为 ws-flv 视频流，前端只需传入后端提供的 ws-flv 地址即可。
@@ -23,6 +37,13 @@ Jessibuca 方案的底层实现原理是借助 wasm、ffmpeg，能同时支持�
 - `优势`：同时支持解码接收 http-flv、ws-flv 两种形式的音视频，H.264/H.265+AAC/PCMA/PCMU 流，WebGL 视频渲染，WebAudio 音频播放。
 
 - `劣势`：相比 Flv.js 方案，比较占 CPU 和内存。如果仅需要支持 H.264 的音视频，建议采用前一种方案
+
+#### Usage
+
+1. 进入 `player-base-jessibuca` 目录
+2. 安装依赖 `npm i`
+3. 启动服务 `npm run serve`
+4. 打开 web 页面, 填入 `ws-flv` 地址即可
 
 ## 参考资料
 
